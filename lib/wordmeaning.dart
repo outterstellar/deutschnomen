@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:almanca_proje/constants.dart';
 import 'package:almanca_proje/main.dart';
 import 'package:almanca_proje/model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WordMeaning extends StatefulWidget {
@@ -13,6 +14,13 @@ class WordMeaning extends StatefulWidget {
 }
 
 class _WordMeaningState extends State<WordMeaning> {
+    static Route<dynamic> route() {
+    return CupertinoPageRoute(
+      builder: (BuildContext context) {
+        return WordMeaning();
+      },
+    );
+  }
   late int question;
   late Word currentWord;
   late List answers = [];
@@ -26,10 +34,11 @@ class _WordMeaningState extends State<WordMeaning> {
   void initState() {
     // TODO: implement initState
     super.initState();
+        questions++;
+
     Random random = Random();
     question = random.nextInt(Constants.words.length - 1);
     currentWord = Constants.words[question];
-
     if (random.nextInt(2) == 0) {
       while (true) {
         answers.add(Constants
@@ -46,6 +55,8 @@ class _WordMeaningState extends State<WordMeaning> {
           break;
         }
       }
+          answers.shuffle();
+    correctanswer = answers.indexOf(currentWord.meaning) + 1;
       currentWordText = currentWord.word;
     } else {
       while (true) {
@@ -63,10 +74,11 @@ class _WordMeaningState extends State<WordMeaning> {
           break;
         }
       }
+          answers.shuffle();
+    correctanswer = answers.indexOf(currentWord.word) + 1;
       currentWordText = currentWord.meaning;
     }
-    answers.shuffle();
-    correctanswer = answers.indexOf(currentWord.word) + 1;
+
   }
 
   @override
@@ -77,7 +89,7 @@ class _WordMeaningState extends State<WordMeaning> {
           padding: const EdgeInsets.all(80.0),
           child: Center(
               child: Text(
-            currentWordText,
+            currentWordText.toCapitalized(),
             style: Constants.wordTextStyle,
           )),
         ),
@@ -110,9 +122,9 @@ class _WordMeaningState extends State<WordMeaning> {
                 }
                 setState(() {});
               },
-              child: Text(answers[0]),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(firstcolor)),
+              child: Text(answers[0].toString().toTitleCase()),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -136,7 +148,7 @@ class _WordMeaningState extends State<WordMeaning> {
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(secondcolor)),
-                child: Text(answers[1])),
+                child: Text(answers[1].toString().toTitleCase())),
             ElevatedButton(
                 onPressed: () {
                   if (buttonsEnabled == true) {
@@ -158,7 +170,7 @@ class _WordMeaningState extends State<WordMeaning> {
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(thirdcolor)),
-                child: Text(answers[2]))
+                child: Text(answers[2].toString().toTitleCase()))
           ],
         )
       ],

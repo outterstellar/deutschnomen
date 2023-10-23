@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:almanca_proje/constants.dart';
 import 'package:almanca_proje/main.dart';
 import 'package:almanca_proje/model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Plural extends StatefulWidget {
@@ -13,6 +14,13 @@ class Plural extends StatefulWidget {
 }
 
 class _PluralState extends State<Plural> {
+    static Route<dynamic> route() {
+    return CupertinoPageRoute(
+      builder: (BuildContext context) {
+        return Plural();
+      },
+    );
+  }
   late int question;
   late Word currentWord;
   late List answers = [];
@@ -28,6 +36,8 @@ class _PluralState extends State<Plural> {
   void initState() {
     // TODO: implement initState
     super.initState();
+        questions++;
+
     Random random = Random();
     while (true) {
       question = random.nextInt(Constants.words.length - 1);
@@ -84,7 +94,7 @@ class _PluralState extends State<Plural> {
           padding: const EdgeInsets.all(80.0),
           child: Center(
               child: Text(
-            currentWord.article.name.toString() + " " + currentWord.word,
+            "${currentWord.article.name} ${currentWord.word}",
             style: Constants.wordTextStyle,
           )),
         ),
@@ -117,15 +127,14 @@ class _PluralState extends State<Plural> {
                 }
                 setState(() {});
               },
-              child: Text(first),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(firstcolor)),
+              child: Text(first),
             ),
             ElevatedButton(
                 onPressed: () {
                   if (buttonsEnabled == true) {
                     buttonsEnabled = false;
-
                     if (correctanswer == 2) {
                       correctQuestions++;
                       secondcolor = Colors.green;

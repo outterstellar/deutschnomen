@@ -9,5 +9,6 @@ class Word{
 enum ArticleEnum{
     der,
     die,
-    das
+    das,
+    none
 }

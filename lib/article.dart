@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:almanca_proje/constants.dart';
 import 'package:almanca_proje/main.dart';
 import 'package:almanca_proje/model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Article extends StatefulWidget {
@@ -13,6 +14,13 @@ class Article extends StatefulWidget {
 }
 
 class _ArticleState extends State<Article> {
+    static Route<dynamic> route() {
+    return CupertinoPageRoute(
+      builder: (BuildContext context) {
+        return Article();
+      },
+    );
+  }
   late int question;
   late Word currentWord;
   late List answers = ["der", "die", "das"];
@@ -25,9 +33,17 @@ class _ArticleState extends State<Article> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    questions++;
     Random random = Random();
-    question = random.nextInt(Constants.words.length - 1);
-    currentWord = Constants.words[question];
+    while (true) {
+      question = random.nextInt(Constants.words.length - 1);
+      currentWord = Constants.words[question];
+      if (currentWord.article == ArticleEnum.none) {
+        continue;
+      } else {
+        break;
+      }
+    }
     correctanswer = answers.indexOf(currentWord.article.name) + 1;
   }
 
@@ -73,9 +89,9 @@ class _ArticleState extends State<Article> {
                 }
                 setState(() {});
               },
-              child: Text("der"),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(firstcolor)),
+              child: const Text("der"),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -99,7 +115,7 @@ class _ArticleState extends State<Article> {
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(secondcolor)),
-                child: Text("die")),
+                child: const Text("die")),
             ElevatedButton(
                 onPressed: () {
                   if (buttonsEnabled == true) {
@@ -122,7 +138,7 @@ class _ArticleState extends State<Article> {
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(thirdcolor)),
-                child: Text("das"))
+                child: const Text("das"))
           ],
         )
       ],
