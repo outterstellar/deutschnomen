@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:almanca_proje/article.dart';
-import 'package:almanca_proje/constants.dart';
-import 'package:almanca_proje/model.dart';
-import 'package:almanca_proje/plural.dart';
-import 'package:almanca_proje/wordmeaning.dart';
+import 'package:almanca_proje/pages/article.dart';
+import 'package:almanca_proje/data/constants.dart';
+import 'package:almanca_proje/data/model.dart';
+import 'package:almanca_proje/pages/plural.dart';
+import 'package:almanca_proje/pages/wordmeaning.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

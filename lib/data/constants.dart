@@ -1,5 +1,5 @@
-import 'package:almanca_proje/article.dart';
-import 'package:almanca_proje/model.dart';
+import 'package:almanca_proje/pages/article.dart';
+import 'package:almanca_proje/data/model.dart';
 import 'package:flutter/material.dart';
 
 class Constants {

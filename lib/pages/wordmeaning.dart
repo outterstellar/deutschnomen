@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:almanca_proje/constants.dart';
+import 'package:almanca_proje/data/constants.dart';
 import 'package:almanca_proje/main.dart';
-import 'package:almanca_proje/model.dart';
+import 'package:almanca_proje/data/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
